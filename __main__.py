@@ -41,15 +41,14 @@ if __name__ == '__main__':
         remove_contracts = set(os.getenv("REMOVE_CONTRACTS").split(","))
     except Exception as e:
         print(e)
-        print("Environmental variable REMOVE_CONTRACTS is" + os.getenv("REMOVE_CONTRACTS"))
+        print("Environmental variable REMOVE_CONTRACTS is not set")
         sys.exit(1)
 
     remove_wallets_percentile = check_type_conversion(os.getenv("REMOVE_WALLETS_PERCENTILE"), float)
     remove_contracts_percentile = check_type_conversion(os.getenv("REMOVE_CONTRACTS_PERCENTILE"), float)
-    bucket_name = check_type_conversion(os.getenv("METRONOMO_PUBLIC_DATA_BUCKET_NAME"), str)
-    network = check_type_conversion(os.getenv("METRONOMO_PUBLIC_DATA_NETWORK"), str)
-    granularity = check_type_conversion(os.getenv("METRONOMO_PUBLIC_DATA_GRANULARITY"), str)
-
+    project_name = check_type_conversion(os.getenv("METRONOMO_PUBLIC_DATA_PROJECT"), str)
+    dataset = check_type_conversion(os.getenv("METRONOMO_PUBLIC_DATA_DATASET"), str)
+ 
     if os.getenv("MONGO_HOST"):
         mongo_host = check_type_conversion(os.getenv("MONGO_HOST"), str)
     else:
@@ -63,15 +62,17 @@ if __name__ == '__main__':
     mongo_database = check_type_conversion(os.getenv("MONGO_DATABASE"), str)
     mongo_collection = check_type_conversion(os.getenv("MONGO_COLLECTION"), str)
 
+    token_json_path = check_type_conversion(os.getenv("METRONOMO_BQ_TOKEN_JSON_PATH"), str)
+
     # generating dates rane
     dates = [start_date - datetime.timedelta(days=x) for x in range(dates_range)]
     print("Dates : " +  ",".join([str(d) for d in dates]))
 
     # creating connector to public Optimism data storage
-    gcs_connector = dc.MetronomoTXCloudStorageConnector(dates, with_public_data=with_public_data, bucket_name=bucket_name, network=network, granularity=granularity)
+    bq_connector = dc.MetronomoOptimismTXBigQueryConnector(dates, project=project_name, dataset=dataset, token_json_path=token_json_path)
 
     # retrieving data
-    data = gcs_connector.getData()
+    data = bq_connector.getData()
     print("Data loaded")
 
     # calculating similatiry

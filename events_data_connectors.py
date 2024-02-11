@@ -38,11 +38,14 @@ class MetronomoOptimismTXBigQueryConnector(DataConnector):
         self.query_t = """
             SELECT * 
             FROM `optimism_data.v_transactions_full_30`
+            limit 100
             """
         
 
     def getData(self):
-        query_job = client.query(query_t)
-        transactions = query_job.result().to_dataframe().drop('date_', axis=1).groupby(['from_address', 'to_address']).sum()
+        query_job = self.client.query(self.query_t)
+        transactions = query_job.result().to_dataframe().drop('date_', axis=1).groupby(['from_address', 'to_address']).sum().reset_index()
+        print(transactions.head())
+        print(transactions.columns)
         transactions.columns = ["from_address", "to_address", "interactions_num"]
         return transactions
