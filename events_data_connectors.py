@@ -38,7 +38,6 @@ class MetronomoOptimismTXBigQueryConnector(DataConnector):
         self.query_t = """
             SELECT * 
             FROM `optimism_data.v_transactions_full_30`
-            limit 100
             """
         
 
