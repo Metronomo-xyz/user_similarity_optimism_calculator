@@ -37,7 +37,7 @@ class MetronomoOptimismTXBigQueryConnector(DataConnector):
 
         self.query_t = """
             SELECT * 
-            FROM `optimism_data.v_transactions_full_30`
+            FROM `optimism_data.transactions_full_30_short`
             """
         
 

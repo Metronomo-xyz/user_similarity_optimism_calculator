@@ -88,8 +88,14 @@ if __name__ == '__main__':
             fp.write("%s\n" % line)
     print("finished writing file")
 
+#    writing similarity to MongoDB
+    print("writing to mongo")
+
+    mongo_writer = db_writers.MongoWriter(mongo_host, mongo_port)
+    mongo_writer.writeSimilarityToCollection(zipped_similarity, mongo_database, mongo_collection)
+
+    print("finished writing to mongo")
+
+
     sys.exit()
 
-    # writing similarity to MongoDB
-#    mongo_writer = db_writers.MongoWriter(mongo_host, mongo_port)
-#    mongo_writer.writeSimilarityToCollection(zipped_similarity, mongo_database, mongo_collection)
