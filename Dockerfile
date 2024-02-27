@@ -1,4 +1,4 @@
-FROM python
+FROM python:3.11.8-bookworm
 
 WORKDIR /user_similarity_optimism_calculator
 

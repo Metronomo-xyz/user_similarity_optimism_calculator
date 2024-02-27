@@ -33,11 +33,13 @@ class MetronomoOptimismTXBigQueryConnector(DataConnector):
 
         self.token_json_path = token_json_path
         self.credentials = service_account.Credentials.from_service_account_file(self.token_json_path)
-        self.client = bigquery.Client(credentials= self.credentials,project=project)
+        self.client = bigquery.Client()
+
+        #self.client = bigquery.Client(credentials= self.credentials,project=project)
 
         self.query_t = """
             SELECT * 
-            FROM `optimism_data.transactions_full_30_short`
+            FROM `web3advertisement.optimism_data.transactions_full_30_short`
             """
         
 
