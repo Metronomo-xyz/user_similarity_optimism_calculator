@@ -3,6 +3,8 @@ Tool to calculate users similarity on Optimism blockchain
 
 It's part of user_similarity_optimism functionality
 
+![architecture](http://dl3.joxi.net/drive/2024/02/25/0016/0232/1081576/76/fcf7b0a8f8.jpg)
+
 This module calculates users similarity based on transactions data and stores it in provided Google Cloud Storage blob.
 
 After that, you can load this similarity data into user_similarity_optimism_app and request similarities from it.
