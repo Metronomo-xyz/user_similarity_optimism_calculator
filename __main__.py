@@ -62,17 +62,18 @@ if __name__ == '__main__':
     mongo_database = check_type_conversion(os.getenv("MONGO_DATABASE"), str)
     mongo_collection = check_type_conversion(os.getenv("MONGO_COLLECTION"), str)
 
-    token_json_path = check_type_conversion(os.getenv("METRONOMO_BQ_TOKEN_JSON_PATH"), str)
+    bucket_name = check_type_conversion(os.getenv("METRONOMO_PUBLIC_DATA_BUCKET_NAME"), str)
+    blob_name = check_type_conversion(os.getenv("METRONOMO_PUBLIC_DATA_BLOB_NAME"), str)
 
     # generating dates rane
     dates = [start_date - datetime.timedelta(days=x) for x in range(dates_range)]
     print("Dates : " +  ",".join([str(d) for d in dates]))
 
     # creating connector to public Optimism data storage
-    bq_connector = dc.MetronomoOptimismTXBigQueryConnector(dates, project=project_name, dataset=dataset, token_json_path=token_json_path)
+    gcs_connector = dc.MetronomoTXCloudStorageConnector(dates, bucket_name, blob_name, with_public_data)
 
     # retrieving data
-    data = bq_connector.getData()
+    data = gcs_connector.getData()
     print("Data loaded")
 
     # calculating similatiry
