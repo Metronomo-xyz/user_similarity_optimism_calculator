@@ -84,10 +84,10 @@ if __name__ == '__main__':
     lines = [",".join([x[0], x[1], str(x[2])]) for x in zipped_similarity]
     print("writing file")
 
-    with open('somefile2.txt', 'w') as fp:
-        for line in lines:
-            fp.write("%s\n" % line)
-    print("finished writing file")
+#    with open('somefile2.txt', 'w') as fp:
+#        for line in lines:
+#            fp.write("%s\n" % line)
+#    print("finished writing file")
 
 #    writing similarity to MongoDB
     print("writing to mongo")

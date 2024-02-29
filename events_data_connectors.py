@@ -101,7 +101,7 @@ class MetronomoTXCloudStorageConnector(DataConnector):
 
         if (self.with_public_data):
             self.token_json_path = None
-            self.storage_client = storage.Client().create_anonymous_client()
+            self.storage_client = storage.Client.create_anonymous_client()
 
         else:
             self.token_json_path = token_json_path
