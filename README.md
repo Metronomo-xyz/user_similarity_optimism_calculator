@@ -113,6 +113,17 @@ env-files:
 - [static_config.env](#static_configenv) - better not to change
 
 #### .env
+Flag to use publicly available Optimism blockchain data.
+```
+ - USE_PUBLIC_DATA
+ 
+Flag to user publicly available Optimism blockchain data.
+# If `True` data from Metronomo public bucket will be used
+# If `False` - you have to write your own class to get the data from your own storage 
+
+For public data START_DATE and DATES_RANGE variables do nothing - data will be taken from static source. We update this example data from time to time, but not regularly.
+
+```
 
 Variables to access MongoDB server. You HAVE to set your own
 
@@ -129,22 +140,10 @@ Dates choosing. You might use any START_DATE and DATE_RANGE as you want
 - DATES_RANGE - number of days to take into power users calculation. For example, if start date is 12122022 and range 30 then dates will be since 13-11-2022 to 12-12-2022 inclusively
 ```
 #### static_config.env
-Better not to change them. But if you want to change - do it on your own risk.
-```
- - USE_PUBLIC_DATA
- 
-# Flag to user publicly available Optimism blockchain data.
-# If `True` data from Metronomo public bucket will be used
-# If `False` - you have to write your own class to get the data from your own storage 
-
-```
-
 Config file with environment variables to get public Optimism data from Metronomo cloud storage. DO NOT CHANGE
 ```
 - METRONOMO_PUBLIC_DATA_PROJECT
 - METRONOMO_PUBLIC_DATA_BUCKET_NAME
-- METRONOMO_PUBLIC_DATA_NETWORK
-- METRONOMO_PUBLIC_DATA_GRANULARITY
 ```
 
 Variables to configure data removal for similarity calculation.
