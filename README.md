@@ -67,7 +67,13 @@ sudo docker run -it --env-file <path to .env file> <image tag>
 ```
 
 - `<path to .env file>` - path to file, that you created [before](#1createenvfile)
-- `<image tag>` - image tag. Might be obtained by running `sudo docker images` command
+- `<image tag>` - image tag. Might be obtained by running `sudo docker images` command, in our example is "randromtk/user_similarity_optimism_calculator:dev"
+
+*To run locally (but this works only for Linux)*
+
+```
+sudo docker run -it --env-file <path to env file with local mongo host> --network="host" <image tag>
+```
 
 example:
 ```
